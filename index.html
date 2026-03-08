@@ -914,12 +914,20 @@ btn.classList.add("active");
 const container=document.getElementById("galleryContainer");
 container.innerHTML="";
 
-categories[type].forEach(num=>{
+categories[type].forEach((num,index)=>{
 const img=document.createElement("img");
 img.src=`img${num}.webp`;
 img.loading="lazy";
+img.decoding="async";
 img.classList.add("apple-item");
+
 container.appendChild(img);
+
+/* reveal animation */
+setTimeout(()=>{
+img.classList.add("visible");
+}, index*80);
+
 });
 
 }
