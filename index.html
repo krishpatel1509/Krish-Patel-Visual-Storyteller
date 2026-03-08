@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Krish Patel | Visual Storyteller</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+
+body{
+font-family:'Poppins',sans-serif;
+background:#000;
+color:#fff;
+overflow-x:hidden;
+opacity:0;
+transition:opacity 1s ease;
+}
+
+/* TYPOGRAPHY IMPROVEMENT */
+
+h1{
+font-weight:800;
+letter-spacing:3px;
+}
+
+h2{
+font-size:36px;
+margin-bottom:20px;
+font-weight:600;
+}
+
+p{
+font-weight:300;
+color:#bbb;
+}
+
+/* LOADER */
+
+.loader{
+position:fixed;
+inset:0;
+background:#000;
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:700;
+letter-spacing:4px;
+z-index:5000;
+animation:fadeOut 1s ease 2.2s forwards;
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+/* CURSOR */
+
+.cursor{
+position:fixed;
+width:18px;
+height:18px;
+border:2px solid #fff;
+border-radius:50%;
+pointer-events:none;
+transform:translate(-50%,-50%);
+transition:transform .08s ease,width .2s,height .2s;
+z-index:9999;
+mix-blend-mode:difference;
+}
+
+.cursor.active{
+width:40px;
+height:40px;
+}
+
+/* IMAGE LOADING ANIMATION */
+
+img{
+max-width:100%;
+display:block;
+height:auto;
+opacity:0;
+transform:scale(1.05);
+transition:opacity .6s ease, transform .6s ease;
+
+/* PHOTO PROTECTION */
+user-select:none;
+-webkit-user-select:none;
+-webkit-user-drag:none;
+}
+
+img.loaded{
+opacity:1;
+transform:scale(1);
+}
+
+/* NAVBAR */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+padding:20px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:20px;
+z-index:1000;
+transition:.4s;
+}
+
+nav.scrolled{
+background:rgba(0,0,0,0.6);
+backdrop-filter:blur(14px);
+}
+
+nav .logo{
+font-weight:800;
+letter-spacing:2px;
+}
+
+nav .links{
+display:flex;
+align-items:center;
+}
+
+nav .links a{
+color:#aaa;
+text-decoration:none;
+margin-left:28px;
+font-weight:500;
+transition:.3s;
+cursor:pointer;
+}
+
+nav .links a:hover{
+color:#fff;
+}
+
+.menu-btn{
+display:none;
+font-size:28px;
+cursor:pointer;
+z-index:1100;
+}
+
+/* MOBILE NAV MENU */
+
+@media(max-width:768px){
+
+.menu-btn{
+display:block;
+}
+
+nav .links{
+position:absolute;
+top:70px;
+right:0;
+
+display:flex;
+flex-direction:column;
+
+width:220px;
+padding:25px;
+
+background:#000;
+
+border-left:1px solid #111;
+border-bottom-left-radius:10px;
+
+transform:translateX(110%);
+transition:0.35s ease;
+}
+
+nav .links.show{
+transform:translateX(0);
+opacity:1;
+}
+
+nav .links a{
+margin:12px 0;
+}
+
+}
+
+/* PAGE SYSTEM */
+
+.page{
+min-height:100vh;
+width:100%;
+transition:opacity .6s ease, transform .6s ease;
+}
+
+.page.hidden{
+opacity:0;
+transform:translateX(40px);
+pointer-events:none;
+display:none;
+}
+
+.page.active{
+opacity:1;
+transform:translateX(0);
+display:block;
+}
+
+/* HERO */
+
+.hero{
+margin-top:90px;
+height:90vh;
+min-height:420px;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:url("img45.webp") center/cover no-repeat;
+animation:kenburns 20s ease-in-out infinite alternate;
+z-index:-2;
+}
+
+@keyframes kenburns{
+from{transform:scale(1);}
+to{transform:scale(1.08);}
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(0,0,0,0.4),rgba(0,0,0,0.9));
+z-index:-1;
+}
+
+.hero-content p{
+margin-top:15px;
+color:#ddd;
+
+}
+
+.hero-content a{
+display:inline-block;
+margin-top:30px;
+padding:14px 45px;
+border-radius:40px;
+border:1px solid #fff;
+text-decoration:none;
+color:#fff;
+transition:.3s;
+}
+
+.hero-content a:hover{
+background:#fff;
+color:#000;
+}
+
+/* SECTIONS */
+
+section{
+padding:120px 8%;
+text-align:center;
+}
+
+/* FEATURED */
+
+.featured-grid{
+columns:4 220px;
+column-gap:22px;
+margin-top:50px;
+}
+
+.featured-grid img{
+width:100%;
+margin-bottom:22px;
+border-radius:14px;
+cursor:pointer;
+transition:transform .6s cubic-bezier(.2,.65,.3,1), box-shadow .4s;
+}
+
+.featured-grid img:hover{
+transform:scale(1.05);
+box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+
+/* ABOUT */
+
+.about p{
+max-width:850px;
+margin:auto;
+line-height:1.9;
+font-size:18px;
+}
+
+/* GALLERY */
+
+.category-buttons{
+margin-bottom:40px;
+}
+
+.category-buttons button{
+margin:6px;
+padding:10px 30px;
+background:transparent;
+border:1px solid #444;
+color:#aaa;
+cursor:pointer;
+border-radius:30px;
+transition:.3s;
+}
+
+.category-buttons button.active,
+.category-buttons button:hover{
+background:#fff;
+color:#000;
+border-color:#fff;
+}
+
+/* MASONRY GALLERY */
+
+.reveal-img{
+opacity:0;
+transform:translateY(40px);
+transition:opacity .8s ease, transform .8s ease;
+}
+
+.reveal-img.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.grid{
+columns:4 220px;
+column-gap:22px;
+}
+
+/* RESPONSIVE GALLERY */
+
+@media (max-width:1000px){
+.grid{
+columns:3 200px;
+}
+}
+
+@media (max-width:768px){
+.grid{
+columns:2 160px;
+}
+
+.featured-grid{
+columns:2 160px;
+}
+}
+
+@media (max-width:480px){
+.grid{
+columns:1;
+}
+
+.featured-grid{
+columns:1;
+}
+}
+
+.grid img{
+width:100%;
+margin-bottom:22px;
+border-radius:14px;
+cursor:pointer;
+transition:transform .6s cubic-bezier(.2,.65,.3,1), box-shadow .4s;
+}
+
+.grid img:hover{
+transform:scale(1.05);
+box-shadow:0 20px 40px rgba(0,0,0,.6);
+}
+
+/* CONTACT */
+
+.contact-icons{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:40px;
+}
+
+.contact-icons a{
+font-size:30px;
+color:#aaa;
+transition:.3s;
+}
+
+.contact-icons a:hover{
+color:#fff;
+transform:translateY(-6px);
+}
+
+/* CINEMATIC FOOTER */
+
+footer{
+padding:60px 8%;
+text-align:center;
+color:#777;
+border-top:1px solid #111;
+}
+
+footer p{
+margin:6px 0;
+font-size:14px;
+}
+
+/* LIGHTBOX VIEWER */
+
+.lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.95);
+display:flex;
+align-items:center;
+justify-content:center;
+opacity:0;
+pointer-events:none;
+transition:.4s;
+z-index:3000;
+}
+
+.lightbox.active{
+opacity:1;
+pointer-events:auto;
+}
+
+.lightbox img{
+max-width:90%;
+max-height:85%;
+border-radius:10px;
+opacity:1;
+transform:none;
+transition:opacity .3s ease;
+object-fit:contain;
+}
+
+.lightbox span{
+position:absolute;
+top:40px;
+right:60px;
+font-size:40px;
+cursor:pointer;
+}
+
+/* LIGHTBOX NAVIGATION */
+
+.lightbox .nav{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+font-size:40px;
+color:#fff;
+cursor:pointer;
+padding:20px;
+user-select:none;
+}
+
+.lightbox .prev{
+left:20px;
+}
+
+.lightbox .next{
+right:20px;
+}
+
+.lightbox .nav:hover{
+opacity:0.7;
+}
+
+/* SCROLLBAR */
+
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:#222;border-radius:20px;}
+::-webkit-scrollbar-thumb:hover{background:#444;}
+
+/* MOBILE FIXES */
+
+@media(max-width:768px){
+
+.cursor{
+display:none;
+}
+
+}
+
+@media (max-width:768px){
+
+/* Hide arrows on mobile */
+.lightbox .nav{
+display:none;
+}
+
+}
+
+@media (max-width:768px){
+
+/* Hide arrows on mobile */
+.lightbox .nav{
+display:none;
+}
+
+}
+
+/* HERO TEXT FIX FOR MOBILE */
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:32px;
+line-height:1.2;
+}
+
+.hero-content p{
+font-size:15px;
+}
+
+}
+
+.photo{
+position:relative;
+display:inline-block;
+width:100%;
+overflow:hidden;
+border-radius:14px;
+}
+
+.photo img{
+width:100%;
+display:block;
+}
+
+.overlay{
+position:absolute;
+bottom:0;
+left:0;
+right:0;
+padding:20px;
+background:linear-gradient(transparent,rgba(0,0,0,.9));
+color:#fff;
+font-size:14px;
+letter-spacing:2px;
+opacity:0;
+transition:opacity .4s ease;
+}
+
+/* ===================== */
+/* APPLE STYLE REVEAL */
+/* ===================== */
+
+.apple-item{
+opacity:0;
+transform:translateY(60px);
+transition:opacity 1s ease, transform 1s cubic-bezier(.2,.65,.3,1);
+}
+
+.apple-item.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+/* Apple hover animation */
+
+.featured-grid img,
+.grid img{
+transition:
+transform .8s cubic-bezier(.2,.65,.3,1),
+box-shadow .6s ease;
+}
+
+.featured-grid img:hover,
+.grid img:hover{
+transform:scale(1.04);
+box-shadow:0 30px 60px rgba(0,0,0,.7);
+}
+
+.photo:hover .overlay{
+opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="loader">KRISH PATEL</div>
+<div class="cursor"></div>
+
+<nav id="navbar">
+<div class="logo">KP</div>
+
+<div class="menu-btn" onclick="toggleMenu()">
+<i class="fas fa-bars"></i>
+</div>
+
+<div class="links" id="navLinks">
+<a onclick="showHome();closeMenu()">Home</a>
+<a href="#about" onclick="closeMenu()">About</a>
+<a onclick="showGallery();closeMenu()">Gallery</a>
+<a onclick="goContact();closeMenu()">Contact</a>
+</div>
+
+</nav>
+
+<div id="homePage" class="page active">
+
+<section class="hero reveal">
+<div class="hero-content">
+<h1>Framing Stories in Every Shot</h1>
+<p>Through the lens of Krish Patel's iPhone</p>
+<a onclick="showGallery()">View Gallery</a>
+</div>
+</section>
+
+<section id="about" class="about reveal">
+<h2>About Me</h2>
+<p>
+Hi, I'm Krish Patel — passionate about capturing cinematic moments through my iPhone lens.
+Every photograph tells a story of emotion, light, and perspective.
+</p>
+</section>
+
+<section class="apple-reveal">
+<h2 class="apple-item">Featured Photography</h2>
+
+<div class="featured-grid">
+
+<img class="apple-item" src="img1.webp">
+<img class="apple-item" src="img2.webp">
+<img class="apple-item" src="img3.webp">
+<img class="apple-item" src="img4.webp">
+<img class="apple-item" src="img5.webp">
+
+</div>
+
+</section>
+
+<section id="contact" class="contact reveal">
+<h2>Contact Me</h2>
+
+<div class="contact-icons">
+<a href="mailto:krishpatel0875@gmail.com"><i class="fas fa-envelope"></i></a>
+<a href="https://instagram.com/krishhpatel15" target="_blank"><i class="fab fa-instagram"></i></a>
+</div>
+
+</section>
+
+</div>
+
+<div id="galleryPage" class="page hidden">
+<section>
+<h2>Gallery</h2>
+
+<div class="category-buttons">
+<button onclick="showCategory('nature',this)">Nature</button>
+<button onclick="showCategory('art',this)">Art</button>
+<button onclick="showCategory('portraits',this)">Portraits</button>
+<button onclick="showCategory('urban',this)">urban</button>
+</div>
+
+<div id="galleryContainer" class="grid"></div>
+</section>
+</div>
+
+<footer>
+<p>© 2026 Krish Patel</p>
+<p>Visual Storyteller | Shot on iPhone</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+<span class="nav prev">&#10094;</span>
+<img id="lightboxImg">
+<span class="nav next">&#10095;</span>
+</div>
+<script>
+
+/* LOADER */
+
+window.addEventListener("load",()=>{
+document.body.style.opacity="1";
+});
+
+/* IMAGE LOAD ANIMATION */
+
+document.addEventListener("DOMContentLoaded",()=>{
+document.querySelectorAll("img").forEach(img=>{
+img.onload=()=>img.classList.add("loaded");
+});
+});
+
+/* LIGHTBOX */
+
+/* ADVANCED LIGHTBOX GALLERY */
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightboxImg");
+
+const nextBtn = document.querySelector(".next");
+const prevBtn = document.querySelector(".prev");
+
+let galleryImages = [];
+let currentIndex = 0;
+
+/* COLLECT ALL IMAGES */
+
+function collectImages(){
+galleryImages = Array.from(document.querySelectorAll(".featured-grid img, .grid img"));
+}
+
+/* OPEN IMAGE */
+
+document.addEventListener("click",e=>{
+
+if(e.target.matches(".featured-grid img, .grid img")){
+
+collectImages();
+
+currentIndex = galleryImages.indexOf(e.target);
+
+lightbox.classList.add("active");
+document.body.style.overflow="hidden";
+
+showImage();
+
+}
+
+});
+
+/* SHOW IMAGE */
+
+function showImage(){
+
+lightboxImg.style.opacity="0";
+
+setTimeout(()=>{
+
+lightboxImg.src = galleryImages[currentIndex].src;
+
+lightboxImg.style.opacity="1";
+
+},120);
+
+}
+
+/* NEXT IMAGE */
+
+function nextImage(){
+
+currentIndex++;
+
+if(currentIndex >= galleryImages.length){
+currentIndex = 0;
+}
+
+showImage();
+
+}
+
+/* PREVIOUS IMAGE */
+
+function prevImage(){
+
+currentIndex--;
+
+if(currentIndex < 0){
+currentIndex = galleryImages.length - 1;
+}
+
+showImage();
+
+}
+
+/* BUTTON NAVIGATION */
+
+nextBtn.onclick = nextImage;
+prevBtn.onclick = prevImage;
+
+/* CLICK BACKGROUND TO CLOSE */
+
+lightbox.addEventListener("click",(e)=>{
+
+if(e.target === lightbox){
+lightbox.classList.remove("active");
+document.body.style.overflow="auto";
+}
+
+});
+
+/* KEYBOARD NAVIGATION */
+
+document.addEventListener("keydown",e=>{
+
+if(!lightbox.classList.contains("active")) return;
+
+if(e.key==="ArrowRight") nextImage();
+
+if(e.key==="ArrowLeft") prevImage();
+
+if(e.key==="Escape") lightbox.classList.remove("active");
+
+});
+
+/* GALLERY IMAGE SCROLL REVEAL */
+
+window.addEventListener("scroll",()=>{
+
+document.querySelectorAll(".reveal-img").forEach(el=>{
+
+const rect = el.getBoundingClientRect();
+
+if(rect.top < window.innerHeight - 80){
+el.classList.add("active");
+}
+
+});
+
+});
+
+/* MOBILE SWIPE */
+
+let startX = 0;
+
+lightbox.addEventListener("touchstart",e=>{
+startX = e.touches[0].clientX;
+});
+
+lightbox.addEventListener("touchend",e=>{
+
+let endX = e.changedTouches[0].clientX;
+
+if(startX - endX > 50){
+nextImage();
+}
+
+if(endX - startX > 50){
+prevImage();
+}
+
+});
+
+/* PAGE NAVIGATION */
+
+function showGallery(){
+document.getElementById("homePage").classList.remove("active");
+document.getElementById("homePage").classList.add("hidden");
+document.getElementById("galleryPage").classList.remove("hidden");
+document.getElementById("galleryPage").classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function showHome(){
+document.getElementById("galleryPage").classList.remove("active");
+document.getElementById("galleryPage").classList.add("hidden");
+document.getElementById("homePage").classList.remove("hidden");
+document.getElementById("homePage").classList.add("active");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function goContact(){
+showHome();
+setTimeout(()=>{
+document.getElementById("contact").scrollIntoView({behavior:"smooth"});
+},200);
+}
+
+/* GALLERY */
+
+const categories = {
+
+nature:[
+1,8,10,11,13,14,15,
+32,33,34,36,37,38,39,40,41,42,43,44,45
+],
+
+art:[
+5,19,20,21,22,23,24,25,26,27,28,29,30,31
+],
+
+portraits:[
+2,6,7,12,16,17,18
+],
+
+urban:[
+3,4,9,35
+]
+
+};
+
+function showCategory(type,btn){
+
+document.querySelectorAll(".category-buttons button")
+.forEach(b=>b.classList.remove("active"));
+
+btn.classList.add("active");
+
+const container=document.getElementById("galleryContainer");
+container.innerHTML="";
+
+categories[type].forEach(num=>{
+const img=document.createElement("img");
+img.src=`img${num}.webp`;
+img.loading="lazy";
+img.classList.add("apple-item");
+container.appendChild(img);
+});
+
+}
+
+/* ESC KEY → EXIT GALLERY PAGE */
+
+document.addEventListener("keydown",function(e){
+
+if(e.key === "Escape"){
+
+/* If lightbox is open → close image first */
+
+if(lightbox.classList.contains("active")){
+lightbox.classList.remove("active");
+return;
+}
+
+/* If gallery page is open → go back home */
+
+const galleryPage = document.getElementById("galleryPage");
+
+if(galleryPage.classList.contains("active")){
+showHome();
+}
+
+}
+
+});
+
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("show");
+}
+
+/* CLOSE MENU WHEN CLICKING OUTSIDE */
+
+document.addEventListener("click",function(e){
+
+const menu = document.getElementById("navLinks");
+const button = document.querySelector(".menu-btn");
+
+if(
+menu.classList.contains("show") &&
+!menu.contains(e.target) &&
+!button.contains(e.target)
+){
+menu.classList.remove("show");
+}
+
+});
+
+function closeMenu(){
+document.getElementById("navLinks").classList.remove("show");
+}
+
+/* SMOOTH CURSOR */
+
+const cursor = document.querySelector(".cursor");
+
+let mouseX = 0;
+let mouseY = 0;
+let posX = 0;
+let posY = 0;
+
+document.addEventListener("mousemove",(e)=>{
+mouseX = e.clientX;
+mouseY = e.clientY;
+});
+
+function animateCursor(){
+
+posX += (mouseX - posX) * 0.15;
+posY += (mouseY - posY) * 0.15;
+
+cursor.style.left = posX + "px";
+cursor.style.top = posY + "px";
+
+requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+/* NAVBAR BLUR ON SCROLL */
+
+window.addEventListener("scroll",function(){
+
+const nav = document.getElementById("navbar");
+
+if(window.scrollY > 40){
+nav.classList.add("scrolled");
+}else{
+nav.classList.remove("scrolled");
+}
+
+});
+
+/* ========================= */
+/* PHOTO COPYRIGHT PROTECTION */
+/* ========================= */
+
+/* Disable Right Click */
+
+document.addEventListener("contextmenu", function(e){
+e.preventDefault();
+});
+
+/* Disable Image Drag */
+
+document.addEventListener("dragstart", function(e){
+if(e.target.tagName === "IMG"){
+e.preventDefault();
+}
+});
+
+/* Disable Save Shortcuts */
+
+document.addEventListener("keydown", function(e){
+
+if(
+(e.ctrlKey && e.key === "s") ||
+(e.ctrlKey && e.key === "u") ||
+(e.ctrlKey && e.key === "p") ||
+(e.ctrlKey && e.key === "c") ||
+(e.ctrlKey && e.shiftKey && e.key === "I") ||
+(e.ctrlKey && e.shiftKey && e.key === "J") ||
+(e.ctrlKey && e.shiftKey && e.key === "C") ||
+e.key === "F12"
+){
+e.preventDefault();
+}
+
+});
+
+/* Block Print Screen */
+
+document.addEventListener("keyup", function(e){
+
+if(e.key === "PrintScreen"){
+navigator.clipboard.writeText('');
+}
+
+});
+
+/* ===================== */
+/* APPLE SCROLL REVEAL */
+/* ===================== */
+
+const appleObserver = new IntersectionObserver((entries)=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+const items = entry.target.querySelectorAll(".apple-item");
+
+items.forEach((item,index)=>{
+
+setTimeout(()=>{
+item.classList.add("visible");
+}, index * 120);
+
+});
+
+}
+
+});
+
+},{
+threshold:0.2
+});
+
+document.querySelectorAll(".apple-reveal").forEach(section=>{
+appleObserver.observe(section);
+});
+
+showCategory('nature',document.querySelector(".category-buttons button"));
+
+</script>
+
+</body>
+</html>
