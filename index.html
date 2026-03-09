@@ -599,6 +599,15 @@ box-shadow:0 30px 60px rgba(0,0,0,.7);
 opacity:1;
 }
 
+/* ============================= */
+/* SCREENSHOT BLUR PROTECTION */
+/* ============================= */
+
+body.screenshot-blur{
+filter: blur(25px) brightness(0.6);
+transition: filter 0.2s ease;
+}
+
 </style>
 </head>
 
@@ -1115,7 +1124,36 @@ e.preventDefault();
 
 }, {passive:false});
 
-showCategory('nature',document.querySelector(".category-buttons button"));
+showCategory('nature',document.querySelector(".category-buttons button"));showCategory('nature',document.querySelector(".category-buttons button"));
+
+/* ============================= */
+/* SCREENSHOT BLUR DETECTION */
+/* ============================= */
+
+function blurPage(){
+document.body.classList.add("screenshot-blur");
+}
+
+function unblurPage(){
+document.body.classList.remove("screenshot-blur");
+}
+
+/* tab switch detection */
+document.addEventListener("visibilitychange", () => {
+if(document.hidden){
+blurPage();
+}else{
+setTimeout(unblurPage,200);
+}
+});
+
+/* window focus detection */
+window.addEventListener("blur", blurPage);
+window.addEventListener("focus", unblurPage);
+
+/* mobile app switch detection */
+document.addEventListener("pagehide", blurPage);
+document.addEventListener("pageshow", unblurPage);
 
 </script>
 
